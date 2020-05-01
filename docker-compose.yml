@@ -1,0 +1,32 @@
+version: "2"
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      - "MYSQL_USER=root"
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=sales"
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+    links:
+      - mysql:db
+
+  python_app:
+    image: python_app
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - "./data:/app/data"
