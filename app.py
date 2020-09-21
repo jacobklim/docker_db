@@ -23,5 +23,7 @@ engine = db.create_engine(connection_str)
 
 connection = engine.connect()
 
-df = pd.read_excel(os.path.join(WORK_DIR, 'data/data.xlsx'))
-df.to_sql('sales_table', connection, if_exists='replace')
+#df = pd.read_excel(os.path.join(WORK_DIR, 'data/data.xlsx'))
+df = pd.read_csv(os.path.join(WORK_DIR, 'data/sample.csv'))
+df.head()
+df.to_sql('orders', connection, if_exists='replace')

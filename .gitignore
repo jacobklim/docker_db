@@ -1,3 +1,4 @@
 .vscode/
 data/*.xlsx
 env/
+data/*.csv
